@@ -4,7 +4,7 @@
 
 [1]: https://vscode.dev/github/lluppesms/functions.demo/
 
-![azd Compatible!](/Docs/images/AZD_Compatible.png)
+[azd Compatible](/Docs/images/AZD_Compatible.png)
 
 [![deploy.infra.and.function](https://github.com/lluppesms/functions.demo/actions/workflows/deploy-infra-function.yml/badge.svg)](https://github.com/lluppesms/functions.demo/actions/workflows/deploy-infra-function.yml)
 
