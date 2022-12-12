@@ -8,5 +8,6 @@
         "functionapp",
         "popd",
         "pushd"
-    ]
+    ],
+    "azureFunctions.projectSubpath": "src\\AzureFunctionsDemo"
 }
