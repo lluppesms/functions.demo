@@ -18,11 +18,14 @@ param functionStorageAccountName string = ''
 
 // --------------------------------------------------------------------------------
 var templateTag = { TemplateFile: '~functionapp.bicep' }
+var azdTag = { 'azd-service-name': 'function' }
 var tags = union(commonTags, templateTag)
+var functionTags = union(commonTags, templateTag, azdTag)
 
 // --------------------------------------------------------------------------------
 resource storageAccountResource 'Microsoft.Storage/storageAccounts@2019-06-01' existing = { name: functionStorageAccountName }
-var functionStorageAccountConnectionString = 'DefaultEndpointsProtocol=https;AccountName=${storageAccountResource.name};EndpointSuffix=${environment().suffixes.storage};AccountKey=${listKeys(storageAccountResource.id, storageAccountResource.apiVersion).keys[0].value}'
+var accountKey = storageAccountResource.listKeys().keys[0].value
+var functionStorageAccountConnectionString = 'DefaultEndpointsProtocol=https;AccountName=${storageAccountResource.name};EndpointSuffix=${environment().suffixes.storage};AccountKey=${accountKey}'
 
 resource appInsightsResource 'Microsoft.Insights/components@2020-02-02-preview' = {
   name: functionInsightsName
@@ -66,7 +69,7 @@ resource functionAppResource 'Microsoft.Web/sites@2021-03-01' = {
   name: functionAppName
   location: location
   kind: functionKind
-  tags: tags
+  tags: functionTags
   identity: {
     type: 'SystemAssigned'
   }
