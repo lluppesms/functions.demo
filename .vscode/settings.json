@@ -9,5 +9,6 @@
         "popd",
         "pushd"
     ],
-    "azureFunctions.projectSubpath": "src\\AzureFunctionsDemo"
+    "azureFunctions.projectSubpath": "src\\AzureFunctionsDemo",
+    "dotnet.defaultSolution": "AzureFunctionsDemo.sln"
 }

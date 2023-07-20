@@ -118,6 +118,17 @@ module keyVaultModule 'keyvault.bicep' = {
     applicationUserObjectIds: [ functionModule.outputs.principalId ]
   }
 }
+
+module keyVaultSecretList 'keyvaultlistsecretnames.bicep' = {
+  name: 'keyVault-Secret-List-Names${deploymentSuffix}'
+  dependsOn: [ keyVaultModule ]
+  params: {
+    keyVaultName: keyVaultModule.outputs.name
+    location: location
+    userManagedIdentityId: keyVaultModule.outputs.userManagedIdentityId
+  }
+}
+
 module keyVaultSecret1 'keyvaultsecret.bicep' = {
   name: 'keyVaultSecret1${deploymentSuffix}'
   dependsOn: [ keyVaultModule, functionModule ]
@@ -125,6 +136,7 @@ module keyVaultSecret1 'keyvaultsecret.bicep' = {
     keyVaultName: keyVaultModule.outputs.name
     secretName: 'functionAppInsightsKey'
     secretValue: functionModule.outputs.insightsKey
+    existingSecretNames: keyVaultSecretList.outputs.secretNameList
   }
 }
 module keyVaultSecret2 'keyvaultsecretcosmosconnection.bicep' = {
@@ -132,8 +144,9 @@ module keyVaultSecret2 'keyvaultsecretcosmosconnection.bicep' = {
   dependsOn: [ keyVaultModule, cosmosModule ]
   params: {
     keyVaultName: keyVaultModule.outputs.name
-    keyName: 'cosmosConnectionString'
+    secretName: 'cosmosConnectionString'
     cosmosAccountName: cosmosModule.outputs.name
+    existingSecretNames: keyVaultSecretList.outputs.secretNameList
   }
 }
 module keyVaultSecret3 'keyvaultsecretservicebusconnection.bicep' = {
@@ -141,9 +154,10 @@ module keyVaultSecret3 'keyvaultsecretservicebusconnection.bicep' = {
   dependsOn: [ keyVaultModule, servicebusModule ]
   params: {
     keyVaultName: keyVaultModule.outputs.name
-    keyName: 'serviceBusSendConnectionString'
+    secretName: 'serviceBusSendConnectionString'
     serviceBusName: servicebusModule.outputs.name
     accessKeyName: 'send'
+    existingSecretNames: keyVaultSecretList.outputs.secretNameList
   }
 }
 module keyVaultSecret4 'keyvaultsecretservicebusconnection.bicep' = {
@@ -151,9 +165,10 @@ module keyVaultSecret4 'keyvaultsecretservicebusconnection.bicep' = {
   dependsOn: [ keyVaultModule, servicebusModule ]
   params: {
     keyVaultName: keyVaultModule.outputs.name
-    keyName: 'serviceBusReceiveConnectionString'
+    secretName: 'serviceBusReceiveConnectionString'
     serviceBusName: servicebusModule.outputs.name
     accessKeyName: 'listen'
+    existingSecretNames: keyVaultSecretList.outputs.secretNameList
   }
 }
 module keyVaultSecret5 'keyvaultsecretstorageconnection.bicep' = {
@@ -161,8 +176,9 @@ module keyVaultSecret5 'keyvaultsecretstorageconnection.bicep' = {
   dependsOn: [ keyVaultModule, functionStorageModule ]
   params: {
     keyVaultName: keyVaultModule.outputs.name
-    keyName: 'functionStorageAccountConnectionString'
+    secretName: 'functionStorageAccountConnectionString'
     storageAccountName: functionStorageModule.outputs.name
+    existingSecretNames: keyVaultSecretList.outputs.secretNameList
   }
 }
 module functionAppSettingsModule 'functionappsettings.bicep' = {
