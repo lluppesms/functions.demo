@@ -17,9 +17,13 @@ param forceSecretCreation bool = false
 var secretExists = contains(toLower(existingSecretNames), ';${toLower(trim(secretName))};')
 
 resource serviceBusResource 'Microsoft.ServiceBus/namespaces@2021-11-01' existing = { name: serviceBusName }
-var serviceBusEndpoint = '${serviceBusResource.id}/AuthorizationRules/${accessKeyName}' 
+// var serviceBusEndpoint = '${serviceBusResource.id}/AuthorizationRules/${accessKeyName}' 
+// var serviceBusKey = '${listKeys(serviceBusEndpoint, serviceBusResource.apiVersion).primaryKey}'
+// var serviceBusConnectionString = 'Endpoint=sb://${serviceBusResource.name}.servicebus.windows.net/;SharedAccessKeyName=${accessKeyName};SharedAccessKey=${serviceBusKey}' 
+
+var serviceBusEndpoint = '${serviceBusResource.id}/AuthorizationRules/RootManageSharedAccessKey' 
 var serviceBusKey = '${listKeys(serviceBusEndpoint, serviceBusResource.apiVersion).primaryKey}'
-var serviceBusConnectionString = 'Endpoint=sb://${serviceBusResource.name}.servicebus.windows.net/;SharedAccessKeyName=${accessKeyName};SharedAccessKey=${serviceBusKey}' 
+var serviceBusConnectionString = 'Endpoint=sb://${serviceBusResource.name}.servicebus.windows.net/;SharedAccessKeyName=${accessKeyName};SharedAccessKey=${serviceBusKey}}' 
 
 // --------------------------------------------------------------------------------
 resource keyVaultResource 'Microsoft.KeyVault/vaults@2022-07-01' existing = {
