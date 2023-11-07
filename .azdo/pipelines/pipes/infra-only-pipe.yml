@@ -8,13 +8,11 @@ parameters:
 - name: variableGroupName
   default: 'myVariableGroupName'
 - name: runDevSecOpsScan
-  default: 'true'
-- name: runPsRuleScan
-  default: 'true'
+  default: 'false'
 
 # ----------------------------------------------------------------------------------------------------
 stages:
-- ${{ if or(eq(lower(parameters.runDevSecOpsScan), 'true'), eq(lower(parameters.runPsRuleScan), 'true')) }}:
+- ${{ if eq(lower(parameters.runDevSecOpsScan), 'true') }}:
   - stage: ScanApplication
     displayName: Scan Application
     jobs:
@@ -22,7 +20,6 @@ stages:
       parameters:
         environmentName: 'DEMO'
         runDevSecOpsScan: ${{ parameters.runDevSecOpsScan }}
-        runPsRuleScan: ${{ parameters.runPsRuleScan }}
 
 - ${{ each environmentName in parameters.environments }} :
   - stage: CreateInfrastructure${{ environmentName }}
