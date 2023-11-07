@@ -83,18 +83,18 @@ resource serviceBusAuditLogging 'Microsoft.Insights/diagnosticSettings@2021-05-0
       {
         category: 'OperationalLogs'
         enabled: true
-        retentionPolicy: {
-          days: 30
-          enabled: true 
-        }
+        // retentionPolicy: {
+        //   days: 30
+        //   enabled: true 
+        // }
       }
       {
         category: 'RuntimeAuditLogs'
         enabled: true
-        retentionPolicy: {
-          days: 30
-          enabled: true 
-        }
+        // retentionPolicy: {
+        //   days: 30
+        //   enabled: true 
+        // }
       }
     ]
   }
@@ -109,10 +109,10 @@ resource serviceBusMetricLogging 'Microsoft.Insights/diagnosticSettings@2021-05-
       {
         category: 'AllMetrics'
         enabled: true
-        retentionPolicy: {
-          days: 30
-          enabled: true 
-        }
+        // retentionPolicy: {
+        //   days: 30
+        //   enabled: true 
+        // }
       }
     ]
   }

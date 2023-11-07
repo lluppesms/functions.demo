@@ -38,7 +38,7 @@ jobs:
     
     env:
       generatedAppEnvName: ${{ vars.APP_NAME }}-${{ inputs.envCode }}
-      generatedResourceGroupName: ${{ vars.RESOURCEGROUPPREFIX }}-${{ inputs.envCode }}
+      generatedResourceGroupName: ${{ vars.RESOURCEGROUPPREFIX }}_${{ inputs.envCode }}
       
     steps:
     - name: Display Variables
