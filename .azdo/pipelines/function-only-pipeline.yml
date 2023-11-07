@@ -24,10 +24,35 @@ trigger:
   #     - '**/*.yaml'
   #     - '**/*.bicep'
 
+parameters:
+  - name: deployQA
+    displayName: Deploy to QA
+    type: boolean
+    default: false
+  - name: runDevSecOpsScan
+    displayName: Run MS DevSecOps Scan
+    type: boolean
+    default: false
+  - name: runPsRuleScan
+    displayName: Run PSRule Bicep Scan
+    type: boolean
+    default: false
+
 # ----------------------------------------------------------------------------------------------------
 stages:
-- template: pipes/function-only-pipe.yml
-  parameters:
-    variableGroupName: 'FunctionDemo'
-    environments: ['DEMO']  # ['DEV','PROD'] ['DEV','QA'] or ['DEV','QA','PROD']
-    projectDirectory: 'src/AzureFunctionsDemo'
+- ${{ if eq(lower(parameters.deployQA), 'false') }}:
+  - template: pipes/function-only-pipe.yml
+    parameters:
+      variableGroupName: 'FunctionDemo'
+      environments: ['DEMO']
+      projectDirectory: 'src/AzureFunctionsDemo'
+      runDevSecOpsScan: ${{ parameters.runDevSecOpsScan }}
+      runPsRuleScan: ${{ parameters.runPsRuleScan }}
+- ${{ if eq(lower(parameters.deployQA), 'true') }}:
+  - template: pipes/function-only-pipe.yml
+    parameters:
+      variableGroupName: 'FunctionDemo'
+      environments: ['DEMO','QA']
+      projectDirectory: 'src/AzureFunctionsDemo'
+      runDevSecOpsScan: ${{ parameters.runDevSecOpsScan }}
+      runPsRuleScan: ${{ parameters.runPsRuleScan }}
