@@ -48,31 +48,27 @@ resource serviceBusAccessKeyResource 'Microsoft.ServiceBus/namespaces/Authorizat
   }
 }
 
+resource serviceBusAccessKeyResourceSend 'Microsoft.ServiceBus/namespaces/AuthorizationRules@2022-01-01-preview' = {
+  parent: serviceBusResource
+  name: 'send'
+  properties: {
+    rights: [ 'Send' ]
+  }
+}
+
+resource serviceBusAccessKeyResourceListen 'Microsoft.ServiceBus/namespaces/AuthorizationRules@2022-01-01-preview' = {
+  parent: serviceBusResource
+  name: 'listen'
+  properties: {
+    rights: [ 'Listen' ]
+  }
+}
+
+
 resource serviceBusTopic 'Microsoft.ServiceBus/namespaces/topics@2022-10-01-preview' = [for topicName in topicNames: {
   name: topicName
   parent: serviceBusResource
 }]
-
-
-resource serviceBusTopicListen 'Microsoft.ServiceBus/namespaces/topics/authorizationrules@2022-10-01-preview' = {
-  parent: serviceBusTopic[0]
-  name: 'listen'
-  properties: {
-    rights: [
-      'Listen'
-    ]
-  }
-}
-
-resource serviceBusTopicSend 'Microsoft.ServiceBus/namespaces/topics/authorizationrules@2022-10-01-preview' = {
-  parent: serviceBusTopic[0]
-  name: 'send'
-  properties: {
-    rights: [
-      'Send'
-    ]
-  }
-}
 
 resource serviceBusQueueResource 'Microsoft.ServiceBus/namespaces/queues@2022-01-01-preview' = [for queueName in queueNames: {
   parent: serviceBusResource
