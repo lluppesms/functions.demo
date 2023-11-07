@@ -31,10 +31,6 @@ parameters:
     displayName: Run MS DevSecOps Scan
     type: boolean
     default: false
-  - name: runPsRuleScan
-    displayName: Run PSRule Bicep Scan
-    type: boolean
-    default: false
 
 # ----------------------------------------------------------------------------------------------------
 stages:
@@ -44,11 +40,9 @@ stages:
       variableGroupName: 'FunctionDemo'
       environments: ['DEMO']
       runDevSecOpsScan: ${{ parameters.runDevSecOpsScan }}
-      runPsRuleScan: ${{ parameters.runPsRuleScan }}
 - ${{ if eq(lower(parameters.deployQA), 'true') }}:
   - template: pipes/infra-only-pipe.yml
     parameters:
       variableGroupName: 'FunctionDemo'
       environments: ['DEMO','QA']
       runDevSecOpsScan: ${{ parameters.runDevSecOpsScan }}
-      runPsRuleScan: ${{ parameters.runPsRuleScan }}

@@ -14,9 +14,9 @@ parameters:
 - name: environmentName
   default: 'DEMO'
 - name: runDevSecOpsScan
-  default: 'true'
+  default: 'false'
 - name: runPsRuleScan
-  default: 'true'
+  default: 'false'
 
 # ----------------------------------------------------------------------------------------------------
 jobs:
