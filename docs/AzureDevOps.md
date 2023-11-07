@@ -45,19 +45,19 @@ This example sends a text message so you will want to have a Twilio account set 
      --project='<yourAzDOProject>' 
      --name DurableDemo 
      --variables 
-         appName='<yourInitials>-FunctionDemo' 
-         serviceConnectionName='<yourServiceConnection>' 
-         azureSubscription='<yourAzureSubscriptionName>' 
-         subscriptionId='<yourSubscriptionId>' 
-         location='eastus' 
-         storageSku='Standard_LRS' 
-         functionAppSku='Y1' 
-         functionAppSkuFamily='Y' 
-         functionAppSkuTier='Dynamic' 
+         appName='<yourInitials>fncosmos' 
+         functionAppSku='Y1'
+         functionAppSkuFamily='Y'
+         functionAppSkuTier='Dynamic'
+         functionName='process'
          keyVaultOwnerUserId='owner1SID'
-         twilioAccountSid='<twilioAccountSid>'
-         twilioAuthToken='<twilioAuthToken>'
-         twilioPhoneNumber='<twilioPhoneNumber>'
+         location='eastus' 
+         resourceGroupPrefix='rg_function_cosmos'
+         runSecurityDevOpScan='true'
+         serviceConnectionName='<yourServiceConnectionName>' 
+         storageSku='Standard_LRS'
+         subscriptionId='<yourSubscriptionId>' 
+         subscriptionName='<yourAzureSubscriptionName>' 
 ```
 
 ---

@@ -15,12 +15,10 @@ It should look something like this:
 AZURE_CREDENTIALS:
 
 ``` bash
-{
-  "clientId": "<GUID>", 
-  "clientSecret": "<GUID>", 
-  "subscriptionId": "<GUID>", 
-  "tenantId": "<GUID>"
-}
+gh secret set AZURE_CLIENT_ID -b '<GUID>'
+gh secret set AZURE_CLIENT_SECRET -b '<GUID>'
+gh secret set AZURE_TENANT_ID -b '<GUID>'
+gh secret set AZURE_SUBSCRIPTION_ID -b '<yourAzureSubscriptionId>'
 ```
 
 ---
@@ -34,8 +32,8 @@ To create these additional secrets, customize and run this command:
 Required Values:
 
 ``` bash
+gh variable set RESOURCEGROUPPREFIX -b 'rg_function_cosmos_gha'
 gh secret set APP_NAME -b '<yourInitials>-functiong'
-gh secret set AZURE_SUBSCRIPTION_ID -b '<yourAzureSubscriptionId>'
 gh secret set KEYVAULT_OWNER_USERID -b '<owner1SID>'
 ```
 

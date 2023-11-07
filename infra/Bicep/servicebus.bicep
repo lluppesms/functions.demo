@@ -6,6 +6,8 @@ param location string = resourceGroup().location
 param topicNames array = [ 'topic1Name' ]
 param queueNames array = ['queue1Name', 'queue2Name']
 param commonTags object = {}
+param skuName string = 'Standard'
+param skuTier string =  'Standard'
 
 @description('The workspace to store audit logs.')
 param workspaceId string = ''
@@ -23,8 +25,8 @@ resource serviceBusResource 'Microsoft.ServiceBus/namespaces@2022-01-01-preview'
     type: 'SystemAssigned'
   }
   sku: {
-    name: 'Basic'
-    tier: 'Basic'
+    name: skuName
+    tier: skuTier
   }
   properties: {
     minimumTlsVersion: '1.2'

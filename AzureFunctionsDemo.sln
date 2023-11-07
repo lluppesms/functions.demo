@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.2.32630.192
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AzureFunctionsDemo", "AzureFunctionsDemo\AzureFunctionsDemo.csproj", "{0CE147CD-4F9A-4B72-8979-470B31CAC8A2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AzureFunctionsDemo", "src\AzureFunctionsDemo\AzureFunctionsDemo.csproj", "{0CE147CD-4F9A-4B72-8979-470B31CAC8A2}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "AzureDeploy", "AzureDeploy", "{563D9712-F53B-4BC4-BEF8-709075BC5BD8}"
 	ProjectSection(SolutionItems) = preProject
