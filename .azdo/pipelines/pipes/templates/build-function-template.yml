@@ -38,9 +38,9 @@ jobs:
   - task: DotNetCoreCLI@2
     displayName: 'Build Project'
     inputs:
-        command: build
-        projects: $(projectFileName)
-        arguments: '--configuration Release' 
+      command: build
+      projects: $(projectFileName)
+      arguments: '--configuration Release' 
 
   - task: DotNetCoreCLI@2
     displayName: 'Dotnet Publish'
