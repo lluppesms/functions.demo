@@ -10,5 +10,11 @@
         "pushd"
     ],
     "azureFunctions.projectSubpath": "src\\AzureFunctionsDemo",
-    "dotnet.defaultSolution": "AzureFunctionsDemo.sln"
+    "dotnet.defaultSolution": "AzureFunctionsDemo.sln",
+    "terminal.integrated.env.windows": {
+        "PATH": "C:\\Users\\lyleluppes\\.azurelogicapps\\dependencies\\DotNetSDK;${env:PATH}"
+    },
+    "omnisharp.dotNetCliPaths": [
+        "C:\\Users\\lyleluppes\\.azurelogicapps\\dependencies\\DotNetSDK"
+    ]
 }

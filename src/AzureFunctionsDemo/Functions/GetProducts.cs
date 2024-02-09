@@ -26,10 +26,7 @@ public static class GetProducts
                 var product = JsonConvert.DeserializeObject<Product>(docString);
                 documents.Add(product);
             }
-            
         } while (continuationToken != null);
-
-
         return new OkObjectResult(documents);
     }
 }
